@@ -1,0 +1,18 @@
+[project]
+name = "fhgr-dl"
+version = "0.1"
+description = "Deep Learning Module @FHGR"
+dependencies = [
+    "notebook",
+    "pandas",
+    "numpy",
+    "scikit-learn",
+    "plotly",
+    "matplotlib",
+    "tensorflow"
+]
+
+[tool.pyright]
+exclude = ["venv"]
+venvPath = "."
+venv = "venv"
