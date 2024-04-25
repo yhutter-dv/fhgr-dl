@@ -9,7 +9,8 @@ dependencies = [
     "scikit-learn",
     "plotly",
     "matplotlib",
-    "tensorflow"
+    "tensorflow",
+    "pydot"
 ]
 
 [tool.pyright]
