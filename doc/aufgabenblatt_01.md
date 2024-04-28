@@ -52,7 +52,9 @@ Schlussendlich ist ein "Modell" nur eine Ansammlung von trainierten Gewichten un
 In einem ersten Schritt müssen zuerst die Inputgewichte **initial bestimmt werden**. Hierzu gibt es verschiedene Verfahren. Ein bekanntest Verfahren ist die **Random Uniform Initialization**. Hierbei werden die Gewichte einheitlich in einem bestimmten Intervall (-0.1, 0.1) verteilt.
 
 ### Forward Propagation
-Anschliessend wird die Forward Propagation durchgegangen. Hierbei werden die Inputdaten mit den Gewichten multipliziert und mit einem Bias (kleiner Fehler) durch eine Aktivierungsfunktion (Sigmoid/ReLU) gerreicht.
+Anschliessend wird die Forward Propagation durchgegangen. Hierbei werden die Inputdaten mit den Gewichten multipliziert und mit einem Bias (kleiner Fehler) durch eine Aktivierungsfunktion (ReLU) gerreicht.
+
+> Achtung: Hierbei ist wichtig dass sich die `Aktivierungsfunktion des Output Layers` von jener der Hidden Layer unterscheidet. Je nach Problemstellung ist eine andere Aktivierungsfunktion von Nöten. Bei einer binären Klassifikation kann beispielsweise eine Sigmoid Funktion verwendet werden.
 
 ### Back Progpagation
 Anschliessend werden die Gewichte mittels einem Optimizer angepasst. Der Optimizer benutzt eine Fehlerfunktion. Das Ziel hierbei ist es das globale Minmimum der Fehlerfunktion zu finden. Der Optimierungsschritt wird innerhalb der **Back Propagation** gemacht. 

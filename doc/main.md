@@ -22,9 +22,9 @@ Bei Machine-Learning ist noch ein Labeling durch Menschen notwendig, wobei beim 
 
 Die Linearen-Regression ist eine Binäre Klassifikation, es macht einen harten Schnitt und ermittelt immer eine Klasse. Die Logistische Regeression gibt Wahrscheinlichkeiten pro Klasse an.
 
-> Stellen Sie das Vorgehen und den Aufbau eines ‘Feed Forward Neural Networks’ grafisch dar. Die Grafik soll alle Optimierungsschritte und Ablaufschritte enthalten.
+> Warum muss die Aktivierungsfunktion des Output-Layers eine andere sein als die der Hidden-Layers
 
-TODO
+Die Aktivierungsfunktion des Output-Layers muss die Fragestellung beantworten und ist daher von der Fragestellung selbst abhängig.
 
 ## Künstliche Intelligence 
 
