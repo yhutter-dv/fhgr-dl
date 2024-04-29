@@ -9,8 +9,6 @@ title: Aufgabenblatt 01
 author:
 - Yannick Hutter 
 lang: de
-lof: true
-lot: true
 mainfont: SF Pro Text 
 sansfont: SF Pro Text 
 monofont: Fira Code 
