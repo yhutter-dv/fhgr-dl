@@ -50,6 +50,35 @@ Die Linearen-Regression ist eine Binäre Klassifikation, es macht einen harten S
 
 Die Aktivierungsfunktion des Output-Layers muss die Fragestellung beantworten und ist daher von der Fragestellung selbst abhängig.
 
+> Wie kann Overfitting detektiert werden?
+
+Overfitting ist vorhanden, wenn es eine sehr grosse Differenz zwischen `accuracy` und `val_accuracy` gibt. `accuracy` ist hierbei die Genauigkeit auf dem Trainingsdaten, wobei `val_accuracy` die Genauigkeit auf dem Testdaten ist.
+
+> Was sind mögliche Hyperparameter eines Models?
+
+- Anzahl der Hidden Nodes
+- Anzahl der Hidden Layers
+- Anzahl der Epochen
+- Batchgrösse
+- Regularisierungsparameter `regularization`
+
+> Was ist die Problematik mit der Batch Size?
+
+Eine zu grosse Batch Size kann dazu führen, dass alle Daten auf einmal gelernt werden, eine zu kleine Batch Size führt dazu, dass das Modell zu viel "hin und her springt".
+
+> Wie wird die `accuracy` berechnet
+
+Mithilfe der Konfusionsmatrix, d.h. wie viele Treffer gibt es und wie viele davon sind korrekt. TN (True Negatives) in Prozent zum Gesamtanteil.
+
+> Warum macht es nicht immer Sinn die `accuracy` als Metrik zu nehmen?
+
+Weil je nach Anwendungsfall die Precision teilweise überwiegt. Zum Beispiel im Falle von Beatmungsgeräten, wenn diejenigen Geräte erkennt werden wollen welche einen Fehler bei der Beatmung aufweisen. Auch der F1-Score kann von Bedeutung sein.
+
+> Welche Verfahren werden in der Regularisierung verwendet?
+
+Die Verfahren werden meistens in Kombination miteinander verwendet, bspw. Batch Normalisierung und L1/L2 Regularisierung.
+
+
 # Grundlagen
 
 
@@ -64,6 +93,7 @@ Es gibt verschiedene Verfahren, welche auf unterschiedliche Probleme angewendet 
 ## Perceptron
 
 Das Perceptron ist aus folgenden Elementen aufgebaut:
+
 - Mehrere Inputs
 - Mehrere Gewichte (ein Gewicht pro Input)
 - Bias
@@ -71,9 +101,11 @@ Das Perceptron ist aus folgenden Elementen aufgebaut:
 Jeder Input wird mit dem entsprechenden Gewicht multipliziert und aufsummiert. Am Schluss wird noch der Bias dazugenommen. Der **Bias** kann als "kleiner Fehler" interpretiert werden. Dieser Wert geht danach an eine entsprechende Funktion weiter (Lineare, Logistische Regression etc.). Die einzigen Dinge welche das Modell selbst berechnen sind die **Gewichte** und der **Bias**.
 
 ## Back Propagation
+
 Die Back Propagation ist ein sehr wichtiger Bestand Teil des Machine Learnings. Zu Beginn gibt es die Forward Propagation. Hierbei werden die Werte einmal durch das Netz gereicht. Anschliessend wird der Fehler anhand einer **Verlustfunktion** berechnet. Die Verlustfunktion misst, wie sich die Vorhersage vom Modell zum reellen Wert unterscheidet.
 
 ## Loss Funktion
+
 Beispiele für Loss Funktionen bei der Regression sind:
 
 - Mean Squared Error
@@ -85,6 +117,7 @@ Beispiele für Loss Funktionen bei der Klassifikation sind:
 - Categorical Cross-Entropy
 
 # Deep Learning
+
 Beim Deep Learning ist das Ziel **Dinge vorherzusagen**. Es gibt grundsätzlich zwei Probleme welche wir lösen wollen:
 
 - Klassifikation: Einfache Klassifikation und Multi-Klassifikation
@@ -92,6 +125,7 @@ Beim Deep Learning ist das Ziel **Dinge vorherzusagen**. Es gibt grundsätzlich 
 
 
 ## Berechnung der Gewichte
+
 Um am Anfang die Gewichtige zu bestimmen gibt es mehrere Möglichkeiten:
 
 - Random Uniform Initialization: Es werden zufällige Werte herausgesucht welche um den Mittelwert 0 verteilt sind
@@ -107,12 +141,15 @@ Am Anfang sollte mit einem Hidden Layer gestartet werden. Je mehr Hidden Layers 
 ## Aktivierungsfunktionen
 
 ### Rectified Linear Unit (ReLU)
+
 Ist die populärste Funktion für das Deep Learning. Alle negativen Werte werden auf 0 gesetzt und die positiven Werte bleiben positiv.
 
 ### Sigmoid
+
 Die Werte werden in den Bereich zwischen 0 und 1 gemapt.
 
 ## Output Layer
+
 Bei den Output Layers werden folgende Funktionen verwendet:
 
 - Sigmoid (Binäre Klassifikation): Wahrscheinlichkeiten zwischen 0 und 1
@@ -120,24 +157,30 @@ Bei den Output Layers werden folgende Funktionen verwendet:
 - Linear: Wird verwendet um Regressionsprobleme zu lösen
 
 ## Konfusions Matrix
+
 Bei der Konfusions Matrix werden die vorhergesagten Werte mit den tatsächlichen Werten verglichen und in einer Matrix mittels True Positive (TP), False Positives (FP), True Negatives (TN) und False Negatives (FN) dargestellt.
 
 ## Optimizer
+
 Ein Optimirer ist ein Algorithmus welcher die Parameter des Models so beeinflusst, dass die Verlustfunktion möglichst gering wird und die Gewichte dahingegen optimiert.
 
 - Stochastic Gradient
 - Adaptive Moment Estimation
 
 ## Gradient Descent
+
 Die Optimierer benutzen im Hintergrund ein Gradientenverfahren. Hierbei werden Minima der Kurve gesucht. Das Minimum ist dort wo die Ableitung Null ist (tiefste Punkte der Kurve). Hierbei kann es mehrere lokale Minima geben. Die optimale Lösung hierbei st jedoch das globale Minima (tiefster Punkt insgesamt in der Kurve).
 
 ## Epoche
+
 Ein einzelner Trainingsschritt wird als Epoche bezeichnet. Bei jeder Epoche wird jeweils Forward- und Backwards-Propagation durchgeführt.
 
 ## Batches
+
 Die Trainingsdaten werden in Batches organisiert. Zu Beginn werden kleine Batches erstellt (viele kleine Daten). So kann das Modell schnell lernen der Gradient ist jedoch instabieler. Anschliessend werden die Batches vergrössert. Hierdurch steigt die Berechnungszeit, der Gradient wird jedoch stabiler und robuster. Dies wird bspw. mit dem Adabatch erreicht.
 
 ## Klassen und Labels
+
 Grundsätzlich wird zwischen, Klassen, Samples und Labels unterschieden:
 
 - Klassen: Entspricht einer Kategorie
@@ -145,6 +188,7 @@ Grundsätzlich wird zwischen, Klassen, Samples und Labels unterschieden:
 - Label: Ist die Klasse welche mit einem bestimmten Sample assoziiert ist
 
 # Tensoren
+
 Tensoren beschreiben die Dimensionalität der Daten. Tensoren beinhalten immer nummerische Werte:
 
 - 0D Tensoren - Skalare
@@ -157,9 +201,11 @@ Tensoren beschreiben die Dimensionalität der Daten. Tensoren beinhalten immer n
 - Die erste Achse (Achse 0) entspricht der Anzahl der Samples
 
 # Feed Neural Network
+
 Erlaubt nur das Arbeiten mit 2D Tensoren
 
 # Regularisierung
+
 Regularisierung ist eine Methode **um Overfitting zu verhindern**. Dies wird mithilfe eines **Bestrafungsgewichtes** erreicht, welches **zur Loss-Funktion hinzugerechnet wird**. Regularisierung hat mehrere Vorteile:
 
 - Verbesserung der generellen Performanz des Models
@@ -244,4 +290,42 @@ Mithilfe der Batch Normalisierung werden die Input Daten von Layern normalisiert
 - Stabilisierung der Verteilung bei der Aktivierungsfunktion
 - Verhinderung von Overfitting
 - Verbesserung der generellen Performanz des Modells
+
+# Optimierung
+
+Die Optimierung kann auf 3 Ebenen vorgenommen werden:
+
+- Deep Learning Network
+- Back Propagation
+- Overfitting Management
+
+## Deep Learning Network
+
+Das Deep Learning Network kann mithilfe der folgenden Parameter optimiert werden:
+
+- Anzahl der Epochen - Kann jedoch mit der Regularisationsmethode **Early Stopping** gut gehandhabt werden
+- Grösse der Batches - Wichtig
+- Anzahl der Hidden Layers - Standard verwenden bspw. 2
+- Anzahl der Hidden Nodes - Wichtig
+- Aktivierungsfunktionen - Standard verwenden
+- Initialisierungsgewichte - Wichtig
+
+## Back Propagation
+
+Bei der Back Propagation gibt es folgende Parameter:
+
+- Optimierer - In den meisten Fällen kann der Adam Optimierer (adaptives Modell) verwendet werden
+- Lernrate
+
+Grosse Lernrate lassen das Modell schnell lernen, jedoch den Gradienten explodieren, d.h. das Modell wird nie aufhören und zu keiner Lösung kommen. Wenn die Lernrate zu klein ist, wird nicht das optimale globale Minimum innerhalb der Verlustfunktion gefunden.
+
+## Overfitting Management
+
+> Achtung: Overfitting Management sollte auch nur dann betrieben werden, wenn man ein Modell hat, welches einigermassen gute Ergebnisse liefert.
+
+Die Parameter im Overfitting Management sind die folgenden:
+
+- Regularisierung
+- Dropouts
+- Batch Normalization (Normalisierung der Gewichte) - Alle Gewichte haben den Mittelwert 0 und die Standardabweichung 1
 
