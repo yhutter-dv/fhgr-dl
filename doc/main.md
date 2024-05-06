@@ -78,6 +78,10 @@ Weil je nach Anwendungsfall die Precision teilweise überwiegt. Zum Beispiel im 
 
 Die Verfahren werden meistens in Kombination miteinander verwendet, bspw. Batch Normalisierung und L1/L2 Regularisierung.
 
+> Was ist der unterschied zwischen Dense Layern und Convolutional Layern?
+
+Dense Layer lernen globale Muster, Convolutional Layer lernen lokale Muster.
+
 
 # Grundlagen
 
@@ -328,4 +332,73 @@ Die Parameter im Overfitting Management sind die folgenden:
 - Regularisierung
 - Dropouts
 - Batch Normalization (Normalisierung der Gewichte) - Alle Gewichte haben den Mittelwert 0 und die Standardabweichung 1
+
+# Convolutional Networks
+
+Im Gegensatz zu Dense Layern, welche globale Muster lernen, konzentrieren sich die Convolutional Layers auf lokale Muster.
+
+> Wichtig: Convolutional Networks arbeiten mit 3D tensoren, d.h. mit Listen von Matrizen
+
+## Hauptmerkmale
+
+Convolutional Networks besitzen zwei Hauptmerkmale. 
+
+** Gelernte Muster sind nicht abhängig von der Übersetzung **
+
+- Sobald ein Muster gelernt wurde, kann das convnet dieses Muster überall erkennen
+- Visuelles Wort ist nicht abhängig von der Übersetzung
+- Es werden weniger Trainingsdaten benötigt
+
+** covnet lernt räumliche Hierarchie von Mustern **
+
+- Der erste convolutional Layer lernt kleine lokale Muster wie bspw. Kanten
+- Der zweite Layer lernt grössere Muster, welche auf den kleinen Mustern des ersten Layers aufbauen
+- Convnets erlauben das lernen von komplexen und abstrakten visuellen Konzepten
+
+## Feature Map
+
+- Die Convolutional Operation extrahiert Patches von den Input Daten
+- Auf diese Patches wird **die gleiche Operation** angewendet, daraus entsteht die Feature Map
+- Das Format dieser Feature Map ist ein 3D Tensor, bestehnd aus Breite, höhe und einer beliebigen Tiefe
+- Die Tiefe ist ein Parameter des Layers und repräsentiert entsprechende Filter
+- Filter kodieren spezifische Aspekte von den Input Daten
+
+## Prozessablauf
+
+- Über den 3D Tensor der Input Daten wird ein Filter (meistens 3x3 oder 5x5) gelegt
+- Danach wird nur dieser Ausschnitt betrachtet, was bei einem 3D Tensor ein Würfel ist
+- Der Würfel wird zu einem 1D Tensor (Vektor) umgeformt
+- Alle 1D Tensoren werden anschliessend wieder zu einem Würfel zusammengesetzt
+- Dies wird für jede mögliche Kombination wiederholt
+
+
+## Border Effekte
+
+Border Effekte können auftreten wenn die Output Breite und Output Höhe sich von der Input Breite und Input Höhe unterscheiden, um diesem Effekt entgegenzuwirken gibt es zwei Möglichkeiten: 
+
+- Padding
+- Strides
+
+### Padding
+
+Beim Padding wird eine Anzahl von Zeilen und Spalten zur Input Feature Map hinzugefügt
+
+### Strides
+
+> Stride convolutions werden nur selten in der Praxis eingesetzt
+
+Der Stride gibt an, mit welchem Abstand als ein Feature Window über die Input Daten bewegt wird. Ein Stride von 1 bedeutet bspw. dass das Feature Window 1 Pixel pro Durchlauf bewegt wird.
+
+- Ein Stride von 2 hat zur Folge, dass die Feature Map um den Faktor 2 reduziert wird, weil nur jedes zweite Elemente berücksichtigt wird.
+
+
+### Max-Pooling
+
+> Max-Pooling wird eingesetzt um räumliche Hierarchische Features zu lernen. Ohne Max-Pooling kann es sein dass die Input Daten nicht genug sind um Features für das klassifizieren von Bildern zu lernen
+
+- Max-Pooling kann für aggresives Downsampling der Feature Map genutzt werden, d.h. reduzierung der Parameter
+- Max-Pooling extrahiert Ausschnitte aus der Input Feature Map und gibt jeweils pro Kanal nur den Maximalwert zurück
+- Max-Pooling wird bspw. mit Ausschnitten der Grösse 2x2 betrieben um die Feature Map um den Faktor 2 zu reduzieren
+
+Nebst Max-Pooling gibt es auch noch Average-Pooling. Max-Pooling funktioniert jedoch in der Regel besser, da der Maximalwert in der Regel mehr Informationsgehalt beinhaltet als der Durchschnittswert.
 
