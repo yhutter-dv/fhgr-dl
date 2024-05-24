@@ -82,6 +82,10 @@ Die Verfahren werden meistens in Kombination miteinander verwendet, bspw. Batch 
 
 Dense Layer lernen globale Muster, Convolutional Layer lernen lokale Muster.
 
+> Was macht Flattening?
+
+Flattening überführt die höherdimensionierten Tensoren (3D, 4D etc.) auf Tensoren welche in einem Feed-Forward Neural Network verwendet werden können, d.h. Umwandlung in 1D Tensor.
+
 
 # Grundlagen
 
@@ -355,7 +359,7 @@ Convolutional Networks besitzen zwei Hauptmerkmale.
 - Der zweite Layer lernt grössere Muster, welche auf den kleinen Mustern des ersten Layers aufbauen
 - Convnets erlauben das lernen von komplexen und abstrakten visuellen Konzepten
 
-## Feature Map
+## Feature Map
 
 - Die Convolutional Operation extrahiert Patches von den Input Daten
 - Auf diese Patches wird **die gleiche Operation** angewendet, daraus entsteht die Feature Map

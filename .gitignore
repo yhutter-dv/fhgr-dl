@@ -1,6 +1,11 @@
 # PDF Files
 *.pdf
 
+# Dog vs Cats Dataset
+/notebooks/dogsvscats
+/notebooks/dogsvscats_small
+/notebooks/dogsvscats_small
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
