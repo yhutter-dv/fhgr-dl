@@ -86,6 +86,21 @@ Dense Layer lernen globale Muster, Convolutional Layer lernen lokale Muster.
 
 Flattening überführt die höherdimensionierten Tensoren (3D, 4D etc.) auf Tensoren welche in einem Feed-Forward Neural Network verwendet werden können, d.h. Umwandlung in 1D Tensor.
 
+> Was ist der Hauptvorteil der Data Augmentation?
+
+Das Modell sieht die Daten nur einmal und nicht zweimal. 
+
+> Was ist ein Problem bei Data Augmentation und wie kann dieses gelöst werden?
+
+Die Daten sind stark korrelierend mit den Basisdaten. Overfitting kann daher nicht komplett vermieden werden. Eine Mögliche Lösung hierzu ist der Einsatz von Dropouts.
+
+> Warum wird bei vortrainierten Modellen der Faltungs-und Polinomabschnitt eingefroren?
+
+Um zu verhindern, dass beim Lernen die Gewichte und Bias aktualisiert werden und so der "Lernfortschritt" des vortrainierten Modells verloren geht.
+
+> Was ist die Schwierigkeit bei einem Multi-Output Model?
+
+Jedes Output Model hat in der Regel eine unterschiedliche Loss-Funktion. Die Verlustfunktion bei einem Multi-Model Output ist jedoch nur eine einzelne, welche die Summe aus den einzelnen Verlustfunktionen bildet. Mithlife von Gewichtungen kann der Schwerpunkt auf die einzelnen Verlustfunktionen gesetzt werden.
 
 # Grundlagen
 
@@ -286,10 +301,13 @@ Dataset Augmentation ist eine Technik, bei denen neue Trainingsdaten generiert w
 - Farbveränderung
 - Skalierung
 - Zoom
+- Rotation
+
 
 Mithilfe von Data Augmentation kann das Model robustere Features lernen, zudem verbessert sich die Fähigkeit neue Daten zu verallgemeinern.
 
 > Achtung: Data Augmentation funktioniert nicht für jede Art von Datensätzen, bspw. MNIST
+
 
 ## Batch Normalisierung
 
@@ -406,3 +424,58 @@ Der Stride gibt an, mit welchem Abstand als ein Feature Window über die Input D
 
 Nebst Max-Pooling gibt es auch noch Average-Pooling. Max-Pooling funktioniert jedoch in der Regel besser, da der Maximalwert in der Regel mehr Informationsgehalt beinhaltet als der Durchschnittswert.
 
+# Vortrainierte Modelle
+
+Vortrainierte Modelle sind Modelle, welche nicht auf unseren Daten trainiert wurden sondern auf wesentlich grösseren Datenmengen. Die fertig trainierten Modelle können anschliessend von uns verwendet werden. Die Verwendung eines vortrainierten Modells macht vorallem beim arbeiten mit **kleinen Datenmengen** Sinn. Ein bekanntes Beispiel für ein vortrainiertes Modell ist ChatGPT. Heutzutage kann auf vortrainierten Modellen von ChatGPT aufgebaut werden und diese an unsere Anwendungsfälle angepasst werden.
+
+Um diese Modelle zu nutzen gibt es zwei Möglichkeiten:
+
+- Feature Extraction - Aus den Modellen werden die gelerten Features extrahiert
+- Fine Tuning - Die Features beim Modell werden an unsere Fragestellung angeglichen
+
+Die Feature Extraction ist in der Regel schneller, das Fine Tuning dauert länger und benötigt auch grösseren Rechenaufwand.
+
+## Feature Extraction
+
+Bestehende Features und Faltungsteile werden wiederverwendete und nur das Klassifikations/Regressionsproblem wird neu gelöst. Wie viel wiederverwendet werden soll hängt davon ab, wie stark die Daten auf das neue Problem passen. Gibt es nur eine schwache Korrelation, so sollten nur die ersten Layers verwendet werden.
+
+
+## Einzelne Schritte
+
+- Als Basis wird ein vortrainiertes Modell verwendet
+- Eigenes Modell kann auf das vortrainierte Modell "draufgepackt" werden
+- Vortrainiertes Modell wird "eingefroren"
+- Eigenes Modell wird trainiert
+- Votrtrainiertes Modell wird "aufgetaut"
+- Vortrainiertes Modell wird in Kombination mit dem eigenen Modell trainiert
+
+# Transformer Modelle
+
+> Wichtig: Die Normalisierung bei den Transformer Modellen wird nicht über die Batchnormalisierung gemacht sondern jeder Wert wird einzeln normalisiert.
+
+Transformer Architektur wurde erfunden um automatisierte Übersetzungen durchzuführen. Sie basieren auf dem Prinzip der **Selbstaufmerksamkeit**
+
+## Selbstaufmerksamkeit / Aufmerksamkeitsmechanismus
+
+Nur diejenigen Elemente werden berücksichtig, welche relevant und wichtig sind. Hierbei ist der **Aufmerksamkeitsmechanismus** von zentraler Bedeutung. Mithilfe dieses Mechanismus können beispielsweise gewisse Features hervorgehoben oder gelöscht werden. Zudem ermöglicht der Mechanismus dass die Features einen Bezug zu einem Kontext haben.
+
+- Relevanzbewertungen zwischen den Wörtern wird mithilfe des Dot Products verwendet
+- Anschliessend wird die Summe hieraus gebildet
+
+Die Transformer Modelle bestehen aus den Bestandteilen des **Transform Encoders** sowie des **Transform Decoders**. Diese beiden Bestandteile werden immer zusammen gelernt.
+
+## Transformer Encoder
+
+Der Encoder arbeitet auf dem Gesamttext. Wichtig ist, dass der **gesamte Encoder** trainiert wird, d.h. auch der MultiHeadAttention Layer.
+
+## Transformer Decoder
+
+Der Decoder arbeitet **iterativ**.
+
+## Der Positionsvektor
+
+TODO
+
+# Multimodale Input Modelle
+
+Klassische sequenziellen Modelle erwarten immer einen Input und produzieren einen Output. Diese fixe Struktur ist inflexibel. Multimodale Input Modelle erlauben mehrere Inputs von unterschiedlichen Quellen. Jeder Input wird dabei durch einen anderen Kernel im neuronalen Netzwerk bearbeitet.
