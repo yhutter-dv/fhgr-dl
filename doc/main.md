@@ -217,7 +217,8 @@ Tensoren beschreiben die Dimensionalität der Daten. Tensoren beinhalten immer n
 - 0D Tensoren - Skalare
 - 1D Tensoren - Vektoren
 - 2D Tensoren - Matrizen
-- 3D Tensoren - Sensoren höherer Ordnung (3D = Würfel)
+- 3D Tensoren - Sensoren höherer Ordnung (3D = Würfel), bspw. Text, Zeitreihen und Embeddings
+- 4D Tensoren - Bilder - 2D CNN
 
 ## Achsen in Numpy in Bezug auf Python
 
@@ -479,3 +480,7 @@ TODO
 # Multimodale Input Modelle
 
 Klassische sequenziellen Modelle erwarten immer einen Input und produzieren einen Output. Diese fixe Struktur ist inflexibel. Multimodale Input Modelle erlauben mehrere Inputs von unterschiedlichen Quellen. Jeder Input wird dabei durch einen anderen Kernel im neuronalen Netzwerk bearbeitet.
+
+## Layer Weight Sharing
+
+Es ist nicht immer sinvoll jedesmal die Gewichte neu zu berechnen. Teilweise ist es besser auf bereits gelernte Gewichte zurückzugreifen. Dies ist inbesondere dann sinvoll wenn die Modelle ähnliche Probleme lösen. Modelle können hierzu einfach mit der Function-API integriert werden. 
