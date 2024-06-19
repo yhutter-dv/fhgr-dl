@@ -1,2 +1,2 @@
 #!/bin/bash
-pandoc --template ./eisvogel.tex main.md --number-sections --listings --pdf-engine=lualatex  -o ./pdfs/Zusammenfassung.pdf 
+pandoc --template ./eisvogel.tex main.md --number-sections --listings --pdf-engine=lualatex  -o ./pdfs/Zusammenfassung_DeepLearning.pdf 
